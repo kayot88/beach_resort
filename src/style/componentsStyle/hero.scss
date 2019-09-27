@@ -1,0 +1,67 @@
+@import '../colors';
+@import '../base';
+
+.defaultHero,
+.roomsHero {
+  min-height: calc(100vh - 66px);
+  background: url('../../images/defaultBcg.jpeg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.banner {
+  display: inline-block;
+  color: $mainWhite;
+  background: rgba(0, 0, 0, 0.5);
+  letter-spacing: $mainSpacing;
+  padding: 2rem 1rem;
+  text-align: center;
+  text-transform: capitalize;
+  &-title {
+    font-size: 2.5rem;
+  }
+  &-subtitle {
+    border-top: 2px solid #fff;
+    padding-top: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+}
+.btn-primary {
+  display: inline-block;
+  text-decoration: none;
+  letter-spacing: $mainSpacing;
+  color: $mainBlack;
+  background: $primaryColor;
+  padding: 0.4rem 0.9rem;
+  border: 3px solid $primaryColor;
+  border-radius: 3px;
+  transition: $mainTransition;
+  text-transform: uppercase;
+  cursor: pointer;
+  &:hover {
+    background: transparent;
+    color: $primaryColor;
+  }
+}
+@media screen and (min-width: 576px) {
+  .banner {
+    padding: 2rem 3rem;
+    &-title {
+      font-size: 3rem;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .banner {
+    padding: 2rem 6rem;
+    &-title {
+      font-size: 4rem;
+    }
+  }
+}
+.roomsHero {
+  background: url('../../images/room-2.jpeg') center/cover, no-repeat;
+  min-height: 60vh;
+}
