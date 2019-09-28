@@ -7,7 +7,7 @@ const Error = () => {
     <Hero>
       <Banner title="404" subtitle="not found">
         <Link to="/" className="btn-primary">
-          our rooms
+          return home
         </Link>
       </Banner>
     </Hero>

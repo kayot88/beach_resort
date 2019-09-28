@@ -3,11 +3,13 @@
 
 .defaultHero,
 .roomsHero {
-  min-height: calc(100vh - 66px);
+  // min-height: calc(100vh - 66px);
+  min-height: 100vh;
   background: url('../../images/defaultBcg.jpeg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 .banner {
   display: inline-block;
@@ -15,6 +17,7 @@
   background: rgba(0, 0, 0, 0.5);
   letter-spacing: $mainSpacing;
   padding: 2rem 1rem;
+  border-radius: 3px;
   text-align: center;
   text-transform: capitalize;
   &-title {

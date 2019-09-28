@@ -1,0 +1,54 @@
+@import '../colors';
+
+.services {
+  background-color: $mainGrey;
+  text-align: center;
+  padding: 5rem 0;
+  &-service {
+    margin-top: 50px;
+    span{
+      display: inline-block;
+      color: $primaryColor;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &-titles{
+    color: $mainBlack;
+    font-size: 1rem;
+    height: 2rem;
+    text-transform: uppercase;
+    letter-spacing: $mainSpacing;
+  }
+  &-text{
+    margin: 0 auto;
+  }
+  &-center {
+    width: 90vw;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-column-gap: 50px;
+    grid-row-gap: 2rem;
+  }
+  &-header {
+    padding: 2rem;
+    margin: 0 auto;
+    color: $mainBlack;
+    width: 100%;
+    font-size: 30px;
+    text-transform: uppercase;
+    &:after {
+      content: ' ';
+      position: absolute;
+      left: 50%;
+      margin-left: -32px;
+      margin-top: 3rem;
+      height: 0.2rem;
+      width: 4rem;
+      background: $mainBlack;
+      position: absolute;
+    }
+  }
+}
