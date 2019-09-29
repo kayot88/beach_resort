@@ -4,7 +4,7 @@ import Banner from '../components/Banner';
 import { Link } from 'react-router-dom';
 const Rooms = () => {
   return (
-    <Hero>
+    <Hero hero='roomsHero'>
       <Banner title="our rooms">
         <Link to="/" className="btn-primary">
           return home
