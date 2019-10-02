@@ -1,9 +1,60 @@
-// .test{
-//   margin-top: 2rem;
-// }
 .errors {
   text-align: center;
   text-transform: uppercase;
   margin-top: 100px;
   text-shadow: -2px 1px 9px black;
+}
+.room-extras {
+  width: 80vw;
+  margin: 0 auto 3rem auto;
+}
+.extras {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-column-gap: 2rem;
+  grid-row-gap: 1rem;
+}
+.single-room {
+  padding: 5rem 0 0 0;
+  // overflow: hidden;
+  &-img {
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-row-gap: 2rem;
+    grid-column-gap: 50px;
+    margin: 2rem auto;
+  }
+  & img {
+    width: 100%;
+    display: block;
+  }
+  &-info {
+    width: 80vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 2rem auto;
+    text-transform: capitalize;
+  }
+  .desc,
+  .info {
+    margin: 1rem 0;
+  }
+}
+@media screen and (min-width: 992px) {
+  .single-room-images,
+  .single-room-info,
+  .room-extras {
+    width: 95vw;
+    max-width: 1170px;
+  }
+  .single-room-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 2rem;
+  }
+  .info {
+    padding-left: 3rem;
+  }
 }
