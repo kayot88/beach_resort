@@ -7,11 +7,21 @@ const getUnique = (items, value) => {
 
 const RoomsFilter = ({ rooms }) => {
   const context = useContext(RoomContext);
+
   let types = getUnique(rooms, 'type');
   types = ['all', ...types];
   types = types.map((item, i) => {
     return (
       <option value={item} key={i}>
+        {item}
+      </option>
+    );
+  });
+
+  let people = getUnique(rooms, 'capacity');
+  people = people.map((item, i) => {
+    return (
+      <option key={i} value={item}>
         {item}
       </option>
     );
@@ -34,12 +44,30 @@ const RoomsFilter = ({ rooms }) => {
     <section className="filter-container">
       <Title title="room search"></Title>
       <form action="" className="filter-form">
+        {/* Select type */}
         <div className="form-group">
-          <label htmlFor="type">room type</label>
+          <label htmlFor="type" className="form-group-label">
+            room type
+          </label>
           <select name="type" id="type" value={type} onChange={handleChange}>
             {types}
           </select>
-          <input name="maxPrice" onChange={handleChange}></input>
+          {/* <input name="maxPrice" onChange={handleChange}></input> */}
+        </div>
+        {/* Guest input */}
+        <div className="form-group">
+          <label htmlFor="capacity" className="form-group-label">
+            Guests
+          </label>
+          <select
+            name="capacity"
+            id="capacity"
+            value={capacity}
+            onChange={handleChange}
+          >
+            {people}
+          </select>
+          {/* <input name="maxPrice" onChange={handleChange}></input> */}
         </div>
       </form>
     </section>

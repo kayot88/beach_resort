@@ -77,10 +77,13 @@ class RoomProvider extends Component {
     let tempRooms = [...rooms];
     if (type !== 'all') {
       tempRooms = tempRooms.filter(room => room.type === type);
-      this.setState({
-        sortedRooms: tempRooms
-      });
     }
+    if (capacity !== 1) {
+      tempRooms = tempRooms.filter(room => room.capacity >= capacity);
+    }
+    this.setState({
+      sortedRooms: tempRooms
+    });
   };
 
   render() {

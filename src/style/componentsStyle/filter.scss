@@ -1,6 +1,23 @@
 @import '../colors';
+.filter-form {
+  margin: 0 auto;
+  width: 60vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
 
 .filter-container {
   text-align: center;
   color: $mainGrey;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+  &-label {
+    text-transform: uppercase;
+    color: $mainBlack;
+    letter-spacing: $mainSpacing;
+    margin-bottom: 0.5rem;
+  }
 }

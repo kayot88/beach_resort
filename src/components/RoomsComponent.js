@@ -9,8 +9,7 @@ const RoomsContainer = ({context}) => {
     if (!loading) {
       return (
         <>
-          hello from rooms component
-          <RoomsFilter rooms={sortedRooms} />
+          <RoomsFilter rooms={rooms} />
           <RoomsList rooms={rooms} />
         </>
       );
