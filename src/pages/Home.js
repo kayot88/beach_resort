@@ -20,7 +20,6 @@ const Home = () => {
       </Hero>
       <Services />
       <FeaturedRooms />
-      <StyledHero>Hello</StyledHero>
     </>
   );
 };

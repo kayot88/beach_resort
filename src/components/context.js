@@ -8,16 +8,30 @@ class RoomProvider extends Component {
     rooms: [],
     sortedRooms: [],
     featuredRooms: [],
-    loading: true
+    loading: true,
+    type: 'all',
+    capacity: 1,
+    price: 0,
+    minPrice: 0,
+    maxPrice: 0,
+    minSize: 0,
+    maxSize: 0,
+    breakfast: false,
+    pets: false
   };
   componentDidMount() {
     let rooms = this.formatData(items);
     let featuredRooms = rooms.filter(room => room.featured);
+    let maxPrice = Math.max(...rooms.map(room => room.price));
+    let maxSize = Math.max(...rooms.map(room => room.size));
     this.setState({
       rooms,
       featuredRooms,
       sortedRooms: rooms,
-      loading: false
+      loading: false,
+      price: maxPrice,
+      maxPrice,
+      maxSize
     });
   }
   formatData = items => {
@@ -37,9 +51,47 @@ class RoomProvider extends Component {
     });
     return room;
   };
+
+  handleChange = e => {
+    const target = e.target;
+    const value = e.type === 'checked' ? target.checked : target.value;
+    const name = e.target.name;
+    this.setState(
+      {
+        [name]: value
+      },
+      this.filterRooms
+    );
+  };
+  filterRooms = () => {
+    const {
+      rooms,
+      type,
+      capacity,
+      price,
+      minSize,
+      maxSize,
+      breackfast,
+      pets
+    } = this.state;
+    let tempRooms = [...rooms];
+    if (type !== 'all') {
+      tempRooms = tempRooms.filter(room => room.type === type);
+      this.setState({
+        sortedRooms: tempRooms
+      });
+    }
+  };
+
   render() {
     return (
-      <RoomContext.Provider value={{ ...this.state, getRoom: this.getRoom }}>
+      <RoomContext.Provider
+        value={{
+          ...this.state,
+          getRoom: this.getRoom,
+          handleChange: this.handleChange
+        }}
+      >
         {this.props.children}
       </RoomContext.Provider>
     );
@@ -47,4 +99,17 @@ class RoomProvider extends Component {
 }
 
 const RoomConsumer = RoomContext.Consumer;
+
+export function withRoomConsumer(Component) {
+  return function ConsumerWrapper(props) {
+    return (
+      <RoomConsumer>
+        {value => {
+          return <Component {...props} context={value} />;
+        }}
+      </RoomConsumer>
+    );
+  };
+}
+
 export { RoomConsumer, RoomContext, RoomProvider };

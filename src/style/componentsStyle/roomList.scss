@@ -1,0 +1,22 @@
+.roomList {
+  padding: 5rem 0;
+  &-center {
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    grid-gap: 2rem;
+    margin: 0 auto;
+  }
+
+  @media screen and (min-width: 776px) {
+    &-center {
+      width: 90vw;
+    }
+  }
+  @media screen and (min-width: 992px) {
+    &-center {
+      width: 95vw;
+      max-width: 1170px;
+    }
+  }
+}
