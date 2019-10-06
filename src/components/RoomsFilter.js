@@ -28,8 +28,9 @@ const RoomsFilter = ({ rooms }) => {
   });
   // console.log(types);
 
-  const {
+  let {
     handleChange,
+    checkClick,
     type,
     capacity,
     price,
@@ -37,8 +38,8 @@ const RoomsFilter = ({ rooms }) => {
     maxPrice,
     minSize,
     maxSize,
-    breakfastalse,
-    petsalse
+    breackfast,
+    pets
   } = context;
   return (
     <section className="filter-container">
@@ -49,10 +50,15 @@ const RoomsFilter = ({ rooms }) => {
           <label htmlFor="type" className="form-group-label">
             room type
           </label>
-          <select name="type" id="type" value={type} onChange={handleChange}>
+          <select
+            className="form-control"
+            name="type"
+            id="type"
+            value={type}
+            onChange={handleChange}
+          >
             {types}
           </select>
-          {/* <input name="maxPrice" onChange={handleChange}></input> */}
         </div>
         {/* Guest input */}
         <div className="form-group">
@@ -64,10 +70,77 @@ const RoomsFilter = ({ rooms }) => {
             id="capacity"
             value={capacity}
             onChange={handleChange}
+            className="form-control"
           >
             {people}
           </select>
-          {/* <input name="maxPrice" onChange={handleChange}></input> */}
+        </div>
+        {/* Room price */}
+        <div className="form-group">
+          <label className="form-group-label" htmlFor="price">
+            Room price${price}
+          </label>
+          <input
+            type="range"
+            name="price"
+            min={minPrice}
+            max={maxPrice}
+            id="price"
+            value={price}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        {/* Size */}
+        <div className="form-group">
+          <label htmlFor="size" className="form-group-label">
+            Room size
+          </label>
+          <div className="size-input">
+            <input
+              type="number"
+              name="minSize"
+              id="size"
+              value={minSize}
+              onChange={handleChange}
+              className="form-control size-input"
+              // placeholder="min size"
+            />
+            <input
+              placeholder="max size"
+              type="number"
+              name="maxSize"
+              id="size"
+              value={maxSize}
+              onChange={handleChange}
+              className="form-control size-input"
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="single-extra">
+            <label htmlFor="breackfast" className="form-group-label">
+              Breackfast
+            </label>
+            <input
+              type="checkbox"
+              name="breackfast"
+              id="breackfast"
+              checked={breackfast}
+              onChange={handleChange}
+            />
+            <label htmlFor="pets" className="form-group-label">
+              pets
+            </label>
+            <input
+              type="checkbox"
+              name="pets"
+              id="pets"
+              checked={pets}
+              onChange={handleChange}
+              // onClick={checkClick}
+            />
+          </div>
         </div>
       </form>
     </section>
