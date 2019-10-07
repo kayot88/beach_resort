@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import items from '../data';
 import client from '../Contentfull';
 const RoomContext = React.createContext();
 
@@ -22,8 +21,8 @@ class RoomProvider extends Component {
   getData = async () => {
     try {
       let response = await client.getEntries({
-        content_type: 'beachResortRoom',
-        order: "fields.price"
+        content_type: process.env.REACT_APP_CONT_CONTENT_TYPE,
+        order: 'fields.price'
       });
       let rooms = this.formatData(response.items);
       let featuredRooms = rooms.filter(room => room.featured);
