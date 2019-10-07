@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import items from '../data';
-
+// import items from '../data';
+import client from '../Contentfull';
 const RoomContext = React.createContext();
 
 class RoomProvider extends Component {
@@ -19,25 +19,35 @@ class RoomProvider extends Component {
     breackfast: false,
     pets: false
   };
+  getData = async () => {
+    try {
+      let response = await client.getEntries({
+        content_type: 'beachResortRoom',
+        order: "fields.price"
+      });
+      let rooms = this.formatData(response.items);
+      let featuredRooms = rooms.filter(room => room.featured);
+      let maxPrice = Math.max(...rooms.map(room => room.price));
+      let maxSize = Math.max(...rooms.map(room => room.size));
+      this.setState({
+        rooms,
+        featuredRooms,
+        sortedRooms: rooms,
+        loading: false,
+        price: maxPrice,
+        maxPrice,
+        maxSize
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   componentDidMount() {
-    let rooms = this.formatData(items);
-    let featuredRooms = rooms.filter(room => room.featured);
-    let maxPrice = Math.max(...rooms.map(room => room.price));
-    let maxSize = Math.max(...rooms.map(room => room.size));
-    console.log(this.state.pets);
-    this.setState({
-      rooms,
-      featuredRooms,
-      sortedRooms: rooms,
-      loading: false,
-      price: maxPrice,
-      maxPrice,
-      maxSize
-    });
-    // console.log(this.state.pets);
+    this.getData();
   }
   formatData = items => {
+    console.log(items);
     const tempItems = items.map(item => {
       let id = item.sys.id;
       let images = item.fields.images.map(image => image.fields.file.url);
@@ -66,15 +76,7 @@ class RoomProvider extends Component {
       this.filterRooms
     );
   };
-  checkClick = (pets) => {
-    // console.log(pets);
-    // console.log(this.state.pets);
-    this.setState({
-      pets: !this.state.pets
-    })
-    // console.log(this.state.pets);
-  }
-  
+
   filterRooms = () => {
     let {
       rooms,
@@ -86,7 +88,7 @@ class RoomProvider extends Component {
       breackfast,
       pets
     } = this.state;
-    // console.log(this.state.breackfast);
+
     let tempRooms = [...rooms];
     capacity = parseInt(capacity);
     price = parseInt(price);
@@ -97,14 +99,13 @@ class RoomProvider extends Component {
       tempRooms = tempRooms.filter(room => room.capacity >= capacity);
     }
 
-      tempRooms = tempRooms.filter(room => {
-        return room.price <= price;
-      });
+    tempRooms = tempRooms.filter(room => {
+      return room.price <= price;
+    });
 
-
-      tempRooms = tempRooms.filter(room => {
-        return room.size >= minSize && room.size <= maxSize;
-      });
+    tempRooms = tempRooms.filter(room => {
+      return room.size >= minSize && room.size <= maxSize;
+    });
 
     if (breackfast) {
       tempRooms = tempRooms.filter(room => {
@@ -112,7 +113,6 @@ class RoomProvider extends Component {
       });
     }
     if (pets) {
-      // console.log(pets);
       tempRooms = tempRooms.filter(room => {
         return room.pets === true;
       });
@@ -120,7 +120,6 @@ class RoomProvider extends Component {
     this.setState({
       sortedRooms: tempRooms
     });
-    // console.log(this.state.pets);
   };
   render() {
     return (
@@ -128,8 +127,7 @@ class RoomProvider extends Component {
         value={{
           ...this.state,
           getRoom: this.getRoom,
-          handleChange: this.handleChange,
-          // checkClick: this.checkClick
+          handleChange: this.handleChange
         }}
       >
         {this.props.children}

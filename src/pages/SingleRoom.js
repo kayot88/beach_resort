@@ -19,6 +19,7 @@ class SingleRoom extends Component {
   static contextType = RoomContext;
   componentDidMount() {}
   render() {
+    console.log(this.context);
     const { loading, rooms, getRoom } = this.context;
     const room = getRoom(this.state.slug);
     if (!room) {
@@ -44,7 +45,6 @@ class SingleRoom extends Component {
       id
     } = room;
     const [mainImg, ...defaultBcg] = images;
-    console.log(extras);
     return (
       <>
         <StyledHero img={mainImg || defaultBcg} hero="roomsHero">
